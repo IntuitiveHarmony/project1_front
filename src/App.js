@@ -5,8 +5,9 @@ import * as Tone from 'tone'
 import Step from './components/Step'
 
 const App = () => {
-  let [sequences, setSequences] = useState()
+  const [sequences, setSequences] = useState([{}])
   let [userSteps, setUserSteps] = useState(16)
+
 
   //---------------------------------------------
   //      steps grid based on user input
@@ -49,12 +50,11 @@ const App = () => {
       <h3>Sequence: </h3>
       <form>
         <select>
-          <option>PLaese</option>
-          <option>PLaese</option>
-          <option>PLaese</option>
-          <option>PLaese</option>
-          <option>PLaese</option>
-          <option>PLaese</option>
+          {sequences.map((sequence) => {
+            return (
+              <option>{sequence.name}</option>
+            )
+          })}
         </select>
       </form>
       <input type='text' onChange={handleSteps} />
