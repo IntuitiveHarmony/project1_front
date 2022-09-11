@@ -1,20 +1,21 @@
 import React from "react";
+import * as Tone from 'tone'
 import {useState} from 'react';
 import Step from './Step'
 
 
 const Sequencer = (props) => {
-  let emptySeq = {name: '', steps: '',}
-  let [currentSeq, setCurrentSeq] = useState({})
+  let emptySeq = {name: 'Funky', steps: 33}
+  let [currentSeq, setCurrentSeq] = useState(emptySeq)
   let [userSteps, setUserSteps] = useState(16)
 
   //---------------------------------------------
-  //      steps grid based on user input
+  //  steps grid based on state of currentSeq
   //---------------------------------------------
   let steps = []
   let division = 4
 
-  for (let i = 0; i < userSteps; i++) {
+  for (let i = 0; i < currentSeq.steps; i++) {
     division -= 1
     if (division >= 0) {
       steps.push({position: i + 1, class:'step dark'})
@@ -31,17 +32,20 @@ const Sequencer = (props) => {
 
   const handleSelect = (event) => {
     event.preventDefault()
-    setUserSteps(event.target.value)
+    setCurrentSeq(event.target.value)
+    console.log(event.target.value)
   }
 
 
   return (
     <>
-    <h3>Sequence: </h3>
+    <h3>Sequence: {currentSeq.name}</h3>
       <select onChange={handleSelect}>
         {props.sequences.map((sequence) => {
           return (
-            <option key={sequence.id} value={sequence.steps}>{sequence.name}</option>
+            <>
+              <option key={sequence.id} value={sequence}>{sequence.name}</option>
+            </>
           )
         })}
       </select>

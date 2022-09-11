@@ -1,15 +1,11 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import './App.css'
-import * as Tone from 'tone'
-
 import Sequencer from './components/Sequencer'
+import Add from './components/Add'
 
 const App = () => {
   const [sequences, setSequences] = useState([{}])
-  
-
-
 
 
   const getSequences = () => {
@@ -36,6 +32,7 @@ const App = () => {
   return (
     <>
       <h2>Hai</h2>
+      <Add handleCreate={handleCreate}/>
       <Sequencer sequences={sequences} />
     </>
   )
