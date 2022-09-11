@@ -1,3 +1,7 @@
+body {
+  padding: 2em;
+}
+
 .sequencerContainer {
   width: 35px;
   display: grid;
