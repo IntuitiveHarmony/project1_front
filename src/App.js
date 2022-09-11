@@ -5,7 +5,7 @@ import Sequencer from './components/Sequencer'
 import Add from './components/Add'
 
 const App = () => {
-  const [sequences, setSequences] = useState([{}])
+  const [sequences, setSequences] = useState([])
 
 
   const getSequences = () => {
@@ -25,15 +25,25 @@ const App = () => {
     })
  }
 
+ const handleUpdate = (editSequence) => {
+     axios.put('http://localhost:8000/api/contacts/' + editSequence.id, editSequence)
+     .then((response) => {
+       setSequences(sequences.map((sequence) => {
+         return sequence.id !== editSequence.id ? sequence : editSequence
+       }))
+     })
+   }
+
+
   useEffect(() => {
    getSequences()
   }, [])
 
   return (
     <>
-      <h2>Hai</h2>
+      <h2>Project1 Sequencer</h2>
       <Add handleCreate={handleCreate}/>
-      <Sequencer sequences={sequences} />
+      <Sequencer sequences={sequences} handleUpdate={handleUpdate}/>
     </>
   )
 
