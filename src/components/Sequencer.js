@@ -3,6 +3,7 @@ import * as Tone from 'tone'
 import {useState} from 'react';
 import Step from './Step'
 import Edit from './Edit'
+import Delete from './Delete'
 
 
 const Sequencer = (props) => {
@@ -44,6 +45,7 @@ const Sequencer = (props) => {
   return (
     <>
     <Edit currentSeq={currentSeq} handleUpdate={props.handleUpdate}/>
+    <Delete currentSeq={currentSeq} handleDelete={props.handleDelete}/>
     <h3>Sequence: {currentSeq.name}</h3>
       <select onChange={handleSelect}>
         {props.sequences.map((sequence) => {

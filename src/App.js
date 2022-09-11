@@ -26,7 +26,6 @@ const App = () => {
  }
 
  const handleUpdate = (editSequence) => {
-   console.log(editSequence)
      axios.put('http://localhost:8000/api/sequencer/' + editSequence.id, editSequence)
      .then((response) => {
        setSequences(sequences.map((sequence) => {
@@ -34,6 +33,13 @@ const App = () => {
        }))
      })
    }
+ const handleDelete = (deletedSequence) => {
+   console.log(deletedSequence)
+     axios.delete('http://localhost:8000/api/sequencer/' + deletedSequence.id)
+     .then((response) => {
+       setSequences(sequences.filter(sequence => sequence.id !== deletedSequence.id))
+    })
+  }
 
 
   useEffect(() => {
@@ -44,7 +50,7 @@ const App = () => {
     <>
       <h2>Project1 Sequencer</h2>
       <Add handleCreate={handleCreate}/>
-      <Sequencer sequences={sequences} handleUpdate={handleUpdate}/>
+      <Sequencer sequences={sequences} handleUpdate={handleUpdate} handleDelete={handleDelete}/>
     </>
   )
 
