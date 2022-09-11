@@ -5,7 +5,7 @@ const Edit = (props) => {
   const [currentSeq, setCurrentSeq] = useState({...props.currentSeq})
 
   const handleStepsEdit = (event) => {
-    setCurrentSeq({...currentSeq, [event.target.name]: event.target.value})
+    setCurrentSeq({...props.currentSeq, [event.target.name]: event.target.value})
   }
 
 

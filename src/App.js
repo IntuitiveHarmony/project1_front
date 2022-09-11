@@ -26,7 +26,8 @@ const App = () => {
  }
 
  const handleUpdate = (editSequence) => {
-     axios.put('http://localhost:8000/api/contacts/' + editSequence.id, editSequence)
+   console.log(editSequence)
+     axios.put('http://localhost:8000/api/sequencer/' + editSequence.id, editSequence)
      .then((response) => {
        setSequences(sequences.map((sequence) => {
          return sequence.id !== editSequence.id ? sequence : editSequence
