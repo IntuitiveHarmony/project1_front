@@ -4,6 +4,7 @@ import Step from './Step'
 
 
 const Sequencer = (props) => {
+  let emptySeq = {name: '', steps: '',}
   let [currentSeq, setCurrentSeq] = useState({})
   let [userSteps, setUserSteps] = useState(16)
 
@@ -30,22 +31,20 @@ const Sequencer = (props) => {
 
   const handleSelect = (event) => {
     event.preventDefault()
-    setCurrentSeq()
+    setUserSteps(event.target.value)
   }
 
 
   return (
     <>
     <h3>Sequence: </h3>
-    <form>
-      <select onSubmit={handleSelect}>
+      <select onChange={handleSelect}>
         {props.sequences.map((sequence) => {
           return (
-            <option>{sequence.name}</option>
+            <option key={sequence.id} value={sequence.steps}>{sequence.name}</option>
           )
         })}
       </select>
-    </form>
     <input type='text' onChange={handleSteps} />
       <div className='sequencerContainer'>
         {steps.map((step) => {
