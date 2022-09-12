@@ -1,13 +1,19 @@
 import React from "react";
 import * as Tone from 'tone'
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Step from './Step'
+import Add from './Add'
 import Edit from './Edit'
+import Delete from './Delete'
 
 
 const Sequencer = (props) => {
+
   let emptySeq = {name: 'Funky', steps: 32}
   let [currentSeq, setCurrentSeq] = useState(emptySeq)
+
+
+
 
   //---------------------------------------------
   //  steps grid based on state of currentSeq
@@ -27,6 +33,10 @@ const Sequencer = (props) => {
     }
   }
 
+  const updateSeq = (currentSeq) => {
+    setCurrentSeq(currentSeq)
+    console.log(currentSeq)
+  }
 
   const handleSelect = (event) => {
     for (let i = 0; i < props.sequences.length; i++) {
@@ -40,11 +50,15 @@ const Sequencer = (props) => {
     // console.log(event.target.value)
   }
 
+  useEffect(() => {
+
+  }, [])
 
   return (
     <>
-    <Edit currentSeq={currentSeq} handleUpdate={props.handleUpdate}/>
-    <h3>Sequence: {currentSeq.name}</h3>
+    <Add handleCreate={props.handleCreate} updateSeq={updateSeq}/>
+    <details>
+      <summary>Restore Previous</summary>
       <select onChange={handleSelect}>
         {props.sequences.map((sequence) => {
           return (
@@ -54,6 +68,11 @@ const Sequencer = (props) => {
           )
         })}
       </select>
+    </details>
+    <Edit currentSeq={currentSeq} handleUpdate={props.handleUpdate} updateSeq={updateSeq}/>
+    <Delete currentSeq={currentSeq} handleDelete={props.handleDelete}/>
+    <h3>Sequence: {currentSeq.name}</h3>
+
 
 
 
