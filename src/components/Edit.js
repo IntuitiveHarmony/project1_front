@@ -13,19 +13,20 @@ const Edit = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     props.handleUpdate(currentSeq)
+    props.updateSeq(currentSeq)
     console.log(currentSeq)
   }
 
   return (
     <>
       <details>
-        <summary>Edit Current Sequence</summary>
+        <summary>Update Current</summary>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Name: </label>
           <input type='text' name='name' placeholder={props.currentSeq.name} onChange={handleStepsEdit} />
           <br/>
           <label htmlFor="steps">Steps: </label>
-          <input type='number' name='steps' placeholder={props.currentSeq.steps} onChange={handleStepsEdit} />
+          <input type='number' name='steps' placeholder={props.currentSeq.steps} onChange={handleStepsEdit} min='4' max='64'/>
           <input type="submit"/>
         </form>
       </details>

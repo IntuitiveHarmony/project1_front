@@ -2,12 +2,15 @@ import React from "react";
 import {useState} from 'react';
 
 const Delete = (props) => {
-  const [currentSeq, setCurrentSeq] = useState(props.currentSeq)
+  // const [currentSeq, setCurrentSeq] = useState(props.currentSeq)
   return (
     <>
       <details>
-        <summary>Delete current</summary>
-        <button onClick={()=>{props.handleDelete(props.currentSeq)}}>DELETE!</button>
+        <summary>Delete Current</summary>
+        <button onClick={()=>{
+          props.handleDelete(props.currentSeq)
+          
+        }}>DELETE!</button>
       </details>
     </>
   )
