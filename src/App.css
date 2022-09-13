@@ -8,15 +8,19 @@ body {
    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
 }
 .step {
+  padding: .3em;
   text-align: center;
-  width: 2em;
-  height: 3em;
+  width: 4em;
+  height: 5em;
   border-radius: 2em;
   margin: .1em;
 }
 .dark {
-  background-color: rgba(60, 0, 200, .7);
+  background-color: rgb(80, 0, 200);
 }
 .light {
-  background-color: rgba(160, 0, 200, .7);
+  background-color: rgb(160, 0, 200);
+}
+#active {
+  background-color: rgb(255, 170, 255);
 }

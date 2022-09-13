@@ -1,6 +1,6 @@
 import React from "react";
 import * as Tone from 'tone'
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import Step from './Step'
 import Add from './Add'
 import Edit from './Edit'
@@ -9,12 +9,20 @@ import Delete from './Delete'
 
 const Sequencer = (props) => {
 
-  let emptySeq = {name: 'Funky', steps: 32}
-  let [currentSeq, setCurrentSeq] = useState(emptySeq)
+  let emptySeq = {name: 'Create or Restore', steps: 0}
+  const [currentSeq, setCurrentSeq] = useState(emptySeq)
 
 
+  //---------------------------------------------
+  //  Synth(s)?
+  //---------------------------------------------
 
+  let synth = new Tone.Synth({ oscillator: { type: "square8" } }).toDestination()
 
+  const playNote = (note) => {
+    console.log(note)
+    synth.triggerAttackRelease(note, "8n")
+  }
   //---------------------------------------------
   //  steps grid based on state of currentSeq
   //---------------------------------------------
@@ -50,9 +58,6 @@ const Sequencer = (props) => {
     // console.log(event.target.value)
   }
 
-  useEffect(() => {
-
-  }, [])
 
   return (
     <>
@@ -80,7 +85,7 @@ const Sequencer = (props) => {
         {steps.map((step) => {
           return (
             <>
-              <Step step={step} key={step.position}/>
+              <Step step={step} key={step.position} playNote={playNote}/>
             </>
           )
         })}
