@@ -13,6 +13,7 @@ const Sequencer = (props) => {
   const [currentSeq, setCurrentSeq] = useState(emptySeq)
 
 
+
   //---------------------------------------------
   //  Synth(s)?
   //---------------------------------------------
@@ -57,6 +58,30 @@ const Sequencer = (props) => {
     // setCurrentSeq(event.target.value)
     // console.log(event.target.value)
   }
+  //---------------------------------------------
+  //  TRANSPORT/GRID
+  //---------------------------------------------
+
+  const $row = document.body.querySelectorAll('.sequenceContainer > div')
+  let index = 0
+
+  Tone.Transport.scheduleRepeat(repeat, '16n');
+
+  function repeat(time) {
+    let step = index % 16
+        synth = synth
+    let note = 'C3'
+        // $input =$row.querySelector(`input:nth-child(${step + 1})`)
+    if ('#active') synth.triggerAttackRelease(note, '16n', time)
+    index++
+  }
+
+  const handlePlay = () => {
+    Tone.Transport.start();
+  }
+  const handleStop = () => {
+    Tone.Transport.stop();
+  }
 
 
   return (
@@ -78,9 +103,6 @@ const Sequencer = (props) => {
     <Delete currentSeq={currentSeq} handleDelete={props.handleDelete}/>
     <h3>Sequence: {currentSeq.name}</h3>
 
-
-
-
       <div className='sequencerContainer'>
         {steps.map((step) => {
           return (
@@ -90,6 +112,8 @@ const Sequencer = (props) => {
           )
         })}
       </div>
+      <button onClick={handlePlay}>Play</button>
+      <button onClick={handleStop}>Stop</button>
     </>
   )
 
