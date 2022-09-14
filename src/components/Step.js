@@ -2,8 +2,9 @@ import React from "react";
 import {useState} from 'react';
 
 const Step = (props) => {
-  let [note, setNote] = useState('C4')
-  let [active, setActive] = useState(false)
+  const [note, setNote] = useState('C4')
+  const [active, setActive] = useState(false)
+
 
 
   const handleNoteChange = (event) => {

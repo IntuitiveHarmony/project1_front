@@ -11,6 +11,7 @@ const Sequencer = (props) => {
 
   let emptySeq = {name: 'Create or Restore', steps: 0}
   const [currentSeq, setCurrentSeq] = useState(emptySeq)
+  const [grid, setGrid] = useState([])
   const [bpm, setBpm] = useState(100)
 
 
@@ -47,7 +48,9 @@ const Sequencer = (props) => {
     setCurrentSeq(currentSeq)
     console.log(currentSeq)
   }
-
+  //---------------------------------------------
+  //  DROP DOWN MENU FOR SAVED SEQUENCES
+  //---------------------------------------------
   const handleSelect = (event) => {
     for (let i = 0; i < props.sequences.length; i++) {
       if (props.sequences[i].id == event.target.value) {
@@ -60,7 +63,7 @@ const Sequencer = (props) => {
     // console.log(event.target.value)
   }
   //---------------------------------------------
-  //  TRANSPORT/GRID
+  //  TRANSPORT
   //---------------------------------------------
 
   const $row = document.body.querySelectorAll('.sequenceContainer > div')
@@ -72,9 +75,8 @@ const Sequencer = (props) => {
     let step = index % 16
         synth = synth
     let note = 'C3'
-    (``)
     // let $input = $row.querySelector(`input:nth-child(${step + 1})`)
-    if (id = '#active') synth.triggerAttackRelease(note, '32n', time)
+    if ('#active') synth.triggerAttackRelease(note, '32n', time)
     index++
   }
 
