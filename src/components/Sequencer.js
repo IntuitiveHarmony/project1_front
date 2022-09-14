@@ -11,6 +11,7 @@ const Sequencer = (props) => {
 
   let emptySeq = {name: 'Create or Restore', steps: 0}
   const [currentSeq, setCurrentSeq] = useState(emptySeq)
+  const [bpm, setBpm] = useState(100)
 
 
 
@@ -22,7 +23,7 @@ const Sequencer = (props) => {
 
   const playNote = (note) => {
     console.log(note)
-    synth.triggerAttackRelease(note, "8n")
+    synth.triggerAttackRelease(note, "16n")
   }
   //---------------------------------------------
   //  steps grid based on state of currentSeq
@@ -71,18 +72,25 @@ const Sequencer = (props) => {
     let step = index % 16
         synth = synth
     let note = 'C3'
-        // $input =$row.querySelector(`input:nth-child(${step + 1})`)
-    if ('#active') synth.triggerAttackRelease(note, '16n', time)
+    (``)
+    // let $input = $row.querySelector(`input:nth-child(${step + 1})`)
+    if (id = '#active') synth.triggerAttackRelease(note, '32n', time)
     index++
   }
 
   const handlePlay = () => {
-    Tone.Transport.start();
+    Tone.Transport.bpm.value = bpm
+    Tone.Transport.start()
   }
   const handleStop = () => {
-    Tone.Transport.stop();
+    Tone.Transport.stop()
   }
-
+  //---------------------------------------------
+  //  TEMPO
+  //---------------------------------------------
+  const handleTempoChange = (event) => {
+    setBpm(event.target.value)
+  }
 
   return (
     <>
@@ -114,6 +122,11 @@ const Sequencer = (props) => {
       </div>
       <button onClick={handlePlay}>Play</button>
       <button onClick={handleStop}>Stop</button>
+      <div>
+
+        <input id='tempo' type="range" min="1" max="200" defaultValue={bpm} onChange={handleTempoChange}/>
+        <label for="tempo">Tempo: {bpm}</label>
+      </div>
     </>
   )
 
