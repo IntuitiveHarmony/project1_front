@@ -2,16 +2,16 @@ import React from "react";
 import {useState} from 'react';
 
 const Edit = (props) => {
-  const [currentSeq, setCurrentSeq] = useState({...props.currentSeq})
+  let [currentSeqEdit, setCurrentSeqEdit] = useState({...props.currentSeq})
 
-  const handleStepsEdit = (event) => {
-    setCurrentSeq({...props.currentSeq, [event.target.name]: event.target.value})
+  const handleSeqEdit = (event) => {
+    setCurrentSeqEdit({...currentSeqEdit, [event.target.name]: event.target.value})
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    props.handleUpdate(currentSeq)
-    props.updateSeq(currentSeq)
+    props.handleUpdate(currentSeqEdit)
+    props.updateSeq(currentSeqEdit)
     // console.log(currentSeq)
   }
 
@@ -21,10 +21,10 @@ const Edit = (props) => {
         <summary>Update Current</summary>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Name: </label>
-          <input type='text' name='name' defaultValue={props.currentSeq.name} onChange={handleStepsEdit} />
+          <input type='text' name='name' defaultValue={props.currentSeq.name} onChange={handleSeqEdit} />
           <br/>
           <label htmlFor="steps">Steps: </label>
-          <input type='number' name='steps' defaultValue={props.currentSeq.steps} onChange={handleStepsEdit} min='4' max='64'/>
+          <input type='number' name='steps' defaultValue={props.currentSeq.steps} onChange={handleSeqEdit} min='4' max='64'/>
           <input type="submit"/>
         </form>
       </details>

@@ -1,6 +1,7 @@
 import React from "react";
 import * as Tone from 'tone'
 import {useState} from 'react';
+import $ from 'jquery'
 import Step from './Step'
 import Add from './Add'
 import Edit from './Edit'
@@ -9,13 +10,15 @@ import Delete from './Delete'
 
 const Sequencer = (props) => {
 
-  let emptySeq = {name: 'Create or Restore', steps: 0}
-  const [currentSeq, setCurrentSeq] = useState(emptySeq)
+  // let emptySeq = {name: 'Create or Restore', steps: 0}
+  const [currentSeq, setCurrentSeq] = useState({})
   const [grid, setGrid] = useState([])
   const [bpm, setBpm] = useState(100)
 
 
-
+  const handleSetEdit = (event) => {
+    console.log('edit set')
+  }
   //---------------------------------------------
   //  Synth(s)?
   //---------------------------------------------
@@ -33,6 +36,7 @@ const Sequencer = (props) => {
   let division = 4
 
   for (let i = 0; i < currentSeq.steps; i++) {
+    console.log('step' + i)
     division -= 1
     if (division >= 0) {
       steps.push({position: i + 1, class:'step dark'})
@@ -55,6 +59,7 @@ const Sequencer = (props) => {
     for (let i = 0; i < props.sequences.length; i++) {
       if (props.sequences[i].id == event.target.value) {
         setCurrentSeq(props.sequences[i])
+        handleSetEdit()
       }
     }
     // setCurrentId(event.target.value)
@@ -75,8 +80,9 @@ const Sequencer = (props) => {
     let step = index % 16
         synth = synth
     let note = 'C3'
-    // let $input = $row.querySelector(`input:nth-child(${step + 1})`)
-    if ('#active') synth.triggerAttackRelease(note, '32n', time)
+    let $input = document.body.querySelectorAll(`.sequenceContainer > div`)
+    console.log($input)
+    if ($input === true) { synth.triggerAttackRelease(note, '32n', time) }
     index++
   }
 
@@ -100,6 +106,7 @@ const Sequencer = (props) => {
     <details>
       <summary>Restore Previous</summary>
       <select onChange={handleSelect}>
+        <option selected={true} disabled={true}>Select</option>
         {props.sequences.map((sequence) => {
           return (
             <>

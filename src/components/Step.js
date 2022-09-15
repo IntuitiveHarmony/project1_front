@@ -4,6 +4,7 @@ import {useState} from 'react';
 const Step = (props) => {
   const [note, setNote] = useState('C4')
   const [active, setActive] = useState(false)
+  const [stepLock, setStepLock] = useState()
 
 
 
